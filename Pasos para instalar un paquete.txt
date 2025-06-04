@@ -1,0 +1,21 @@
+1.- Entrar a la ruta del proyecto
+
+2.- Crea un entorno virtual (si no tienes uno ya): python -m venv venv
+
+3.- Actívalo: venv\Scripts\activate
+
+4.- Ya con el entorno activo, instalar paquete 
+	ejemplos pip install flask-jwt-extended  , pip install flask-migrate
+
+5.- (Opcional pero recomendado) Guarda tus dependencias:pip freeze > requirements.txt
+
+
+Extra 1.- Dentro del entorno virtual, ver paquetes instalados: pip list
+
+Extra 2.-  para migrar borrar db, luego Borra la carpeta migrations  ejecutat: 
+flask db init
+flask db migrate -m "Inicial"
+flask db upgrade
+							
+
+
