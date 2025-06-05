@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from app.errors import register_error_handlers
+from datetime import  timedelta
+from flasgger import Swagger  # Agrega esto arriba con tus imports
 
 db = SQLAlchemy()          # Creamos una instancia global de la base de datos (SQLAlchemy)
 migrate = Migrate()        # Creamos instancia para migraciones con Alembic/Flask-Migrate
@@ -16,10 +18,16 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False            # Desactivar para no usar tracking (optimiza)
     app.config['JWT_SECRET_KEY'] = 'El que siembra vientos cosecha tempestades'  # Clave secreta para firmar tokens JWT
 
+    # Duración del token (60 minutos)
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=60)
+
     # Inicializamos las extensiones pasándoles la app y otros parámetros si aplica
     db.init_app(app)        # Inicializa la base de datos con la app creada
     migrate.init_app(app, db)  # Inicializa migraciones pasándole la app y el objeto db
     jwt.init_app(app)       # Inicializa JWT para manejo de autenticación por token
+
+    # Inicializa Swagger (aquí lo agregas)
+    Swagger(app)
 
     # Aquí abrimos el contexto de la app para registrar rutas y otras cosas
     with app.app_context():
