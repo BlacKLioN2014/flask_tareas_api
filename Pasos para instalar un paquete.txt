@@ -20,3 +20,5 @@ flask db upgrade
 
 
 C:\Users\abraham.jimenez\Desktop\Proyectos\Python\flask_tareas_api
+
+/apidocs/#/

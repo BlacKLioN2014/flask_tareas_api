@@ -13,6 +13,19 @@ jwt = JWTManager()         # Creamos instancia para manejo de JWT (tokens de seg
 def create_app():
     app = Flask(__name__)  # Creamos la app Flask
 
+    swagger_template = {
+        "swagger": "2.0",
+        "info": {
+            "title": "Mi API de pruebas",
+            "description": "Un poco de todo.",
+            "version": "1.0",
+            "contact": {
+                "name": "Abraham Jimenez",
+                "email": "abrahamijg@gmail.com"
+            }
+        }
+    }
+
     # Configuraciones básicas
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tareas.db'  # Ruta a la base de datos SQLite
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False            # Desactivar para no usar tracking (optimiza)
@@ -27,7 +40,8 @@ def create_app():
     jwt.init_app(app)       # Inicializa JWT para manejo de autenticación por token
 
     # Inicializa Swagger (aquí lo agregas)
-    Swagger(app)
+    # Swagger(app)
+    swagger = Swagger(app, template=swagger_template)
 
     # Aquí abrimos el contexto de la app para registrar rutas y otras cosas
     with app.app_context():
